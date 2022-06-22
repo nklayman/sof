@@ -52,6 +52,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include <zephyr/sys/arch_interface.h>
+
 LOG_MODULE_DECLARE(ipc, CONFIG_SOF_LOG_LEVEL);
 
 #if CONFIG_CAVS && CAVS_VERSION >= CAVS_VERSION_1_8
@@ -967,18 +969,22 @@ static int ipc_glb_gdb_debug(uint32_t header)
 	/* no furher information needs to be extracted form header */
 	(void) header;
 
-#if CONFIG_GDB_DEBUG
-	gdb_init_debug_exception();
-	gdb_init();
-	/* TODO: this asm should be in arch/include/debug/debug.h
-	 * with a generic name and trigger debug exception
-	 */
-	asm volatile("_break 0, 0");
-	return 0;
-#else
-	return -EINVAL;
-#endif
 
+	#if CONFIG_GDBSTUB
+		arch_gdb_enter_stub();
+		return 0;
+	// TODO: remove old GDB stub?
+	#elif CONFIG_GDB_DEBUG
+		gdb_init_debug_exception();
+		gdb_init();
+		/* TODO: this asm should be in arch/include/debug/debug.h
+		* with a generic name and trigger debug exception
+		*/
+		asm volatile("_break 0, 0");
+		return 0;
+	#else
+		return -EINVAL;
+	#endif
 }
 
 #if CONFIG_PROBE

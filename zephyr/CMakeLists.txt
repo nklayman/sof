@@ -813,6 +813,10 @@ zephyr_library_sources_ifdef(CONFIG_GDB_DEBUG
 	${SOF_DEBUG_PATH}/gdb/ringbuffer.c
 )
 
+zephyr_library_sources_ifdef(CONFIG_GDBSTUB
+	${SOF_DEBUG_PATH}/gdbstub-backend-sram.c
+)
+
 zephyr_library_sources_ifdef(CONFIG_DW_DMA
 	${SOF_DRIVERS_PATH}/dw/dma.c
 )
