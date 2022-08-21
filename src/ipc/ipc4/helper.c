@@ -374,6 +374,7 @@ int ipc_comp_disconnect(struct ipc *ipc, ipc_pipe_comp_connect *_connect)
 	return IPC4_SUCCESS;
 }
 
+#ifndef CONFIG_LIBRARY
 /* dma index may be for playback or capture. Current
  * hw supports PLATFORM_MAX_DMA_CHAN of playback
  * and the index more than this will be capture. This function
@@ -674,6 +675,7 @@ int ipc4_create_chain_dma(struct ipc *ipc, struct ipc4_chain_dma *cdma)
 
 	return ret;
 }
+#endif
 
 int ipc4_trigger_chain_dma(struct ipc *ipc, struct ipc4_chain_dma *cdma)
 {
@@ -779,6 +781,10 @@ out:
 	irq_local_enable(flags);
 	return drv;
 }
+// TODO: define this somewhere else
+#ifdef CONFIG_LIBRARY
+#define IMR_BOOT_LDR_MANIFEST_BASE 0x0
+#endif
 
 const struct comp_driver *ipc4_get_comp_drv(int module_id)
 {

@@ -225,7 +225,7 @@ static inline vol_scale_func vol_get_processing_function(struct comp_dev *dev,
 
 static inline void peak_vol_update(struct vol_data *cd)
 {
-#if CONFIG_COMP_PEAK_VOL
+#if CONFIG_COMP_PEAK_VOL && !CONFIG_LIBRARY
 	/* update peakvol in mailbox */
 	mailbox_sw_regs_write(cd->mailbox_offset, &cd->peak_regs, sizeof(cd->peak_regs));
 #endif

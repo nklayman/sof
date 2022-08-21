@@ -307,8 +307,9 @@ static int set_pipeline_state(uint32_t id, uint32_t cmd, bool *delayed, uint32_t
 		break;
 	/* special case- TODO */
 	case SOF_IPC4_PIPELINE_STATE_EOS:
-		if (status != COMP_STATE_ACTIVE)
-			return IPC4_INVALID_REQUEST;
+		COMPILER_FALLTHROUGH;
+		// if (status != COMP_STATE_ACTIVE)
+		//  return IPC4_INVALID_REQUEST;
 	case SOF_IPC4_PIPELINE_STATE_SAVED:
 	case SOF_IPC4_PIPELINE_STATE_ERROR_STOP:
 	default:
@@ -481,6 +482,7 @@ static int ipc4_set_pipeline_state(struct ipc4_message_request *ipc4)
 	return ret;
 }
 
+#ifndef CONFIG_LIBRARY
 static int ipc4_process_chain_dma(struct ipc4_message_request *ipc4)
 {
 	struct ipc4_chain_dma cdma;
@@ -509,6 +511,7 @@ static int ipc4_process_chain_dma(struct ipc4_message_request *ipc4)
 
 	return ret;
 }
+#endif
 
 static int ipc4_process_glb_message(struct ipc4_message_request *ipc4)
 {
@@ -528,9 +531,11 @@ static int ipc4_process_glb_message(struct ipc4_message_request *ipc4)
 		ret = IPC4_UNAVAILABLE;
 		break;
 
+	#ifndef CONFIG_LIBRARY
 	case SOF_IPC4_GLB_CHAIN_DMA:
 		ret = ipc4_process_chain_dma(ipc4);
 		break;
+	#endif
 
 	/* pipeline settings */
 	case SOF_IPC4_GLB_CREATE_PIPELINE:

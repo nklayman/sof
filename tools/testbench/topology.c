@@ -227,7 +227,7 @@ static int tplg_load_filewrite(struct tplg_context *ctx,
 /* load fileread component */
 static int load_fileread(struct tplg_context *ctx, int dir)
 {
-	struct sof *sof = ctx->sof;
+	// struct sof *sof = ctx->sof;
 	struct testbench_prm *tp = ctx->tp;
 	FILE *file = ctx->file;
 	struct sof_ipc_comp_file fileread = {0};
@@ -265,7 +265,8 @@ static int load_fileread(struct tplg_context *ctx, int dir)
 
 	/* create fileread component */
 	register_comp(fileread.comp.type, NULL);
-	if (ipc_comp_new(sof->ipc, ipc_to_comp_new(&fileread)) < 0) {
+	if (comp_new(&fileread.comp) < 0) {
+	// if (ipc_comp_new(sof->ipc, ipc_to_comp_new(&fileread)) < 0) {
 		fprintf(stderr, "error: file read\n");
 		return -EINVAL;
 	}
@@ -277,7 +278,7 @@ static int load_fileread(struct tplg_context *ctx, int dir)
 /* load filewrite component */
 static int load_filewrite(struct tplg_context *ctx, int dir)
 {
-	struct sof *sof = ctx->sof;
+	// struct sof *sof = ctx->sof;
 	struct testbench_prm *tp = ctx->tp;
 	FILE *file = ctx->file;
 	struct sof_ipc_comp_file filewrite = {0};
@@ -315,7 +316,8 @@ static int load_filewrite(struct tplg_context *ctx, int dir)
 
 	/* create filewrite component */
 	register_comp(filewrite.comp.type, NULL);
-	if (ipc_comp_new(sof->ipc, ipc_to_comp_new(&filewrite)) < 0) {
+	if (comp_new(&filewrite.comp) < 0) {
+	// if (ipc_comp_new(sof->ipc, ipc_to_comp_new(&filewrite)) < 0) {
 		fprintf(stderr, "error: new file write\n");
 		return -EINVAL;
 	}

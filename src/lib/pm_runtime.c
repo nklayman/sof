@@ -99,6 +99,7 @@ void pm_runtime_put_sync(enum pm_runtime_context context, uint32_t index)
 	}
 }
 
+#ifndef CONFIG_LIBRARY
 /** Enables power _management_. The management, not the power. */
 void pm_runtime_enable(enum pm_runtime_context context, uint32_t index)
 {
@@ -124,6 +125,7 @@ void pm_runtime_disable(enum pm_runtime_context context, uint32_t index)
 		break;
 	}
 }
+#endif
 
 /** Is the _power_ active. The power, not its management. */
 bool pm_runtime_is_active(enum pm_runtime_context context, uint32_t index)

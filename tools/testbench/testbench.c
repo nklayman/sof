@@ -283,6 +283,7 @@ static void test_pipeline_free_comps(int pipeline_id)
 				fprintf(stderr, "failed to free comp %d\n",
 					icd->id);
 			break;
+		#ifdef CONFIG_IPC_MAJOR_3
 		case COMP_TYPE_BUFFER:
 			if (icd->cb->pipeline_id != pipeline_id)
 				break;
@@ -291,6 +292,7 @@ static void test_pipeline_free_comps(int pipeline_id)
 				fprintf(stderr, "failed to free buffer %d\n",
 					icd->id);
 			break;
+		#endif
 		default:
 			if (icd->pipeline->pipeline_id != pipeline_id)
 				break;

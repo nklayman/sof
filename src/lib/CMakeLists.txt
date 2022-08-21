@@ -6,6 +6,7 @@ if(CONFIG_LIBRARY)
 		dai.c
 		dma.c
 		notifier.c
+		pm_runtime.c
                 agent.c)
 	return()
 endif()

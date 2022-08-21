@@ -126,12 +126,12 @@ HOST_ROOT=../../testbench/build_testbench
 HOST_EXE=$HOST_ROOT/install/bin/testbench
 HOST_LIB=$HOST_ROOT/sof_ep/install/lib
 TPLG_LIB=$HOST_ROOT/sof_parser/install/lib
-TPLG_DIR=../../build_tools/test/topology
+TPLG_DIR=../../topology/topology2/cavs/
 
 # Use topology from component test topologies
 INFMT=s${BITS_IN}le
 OUTFMT=s${BITS_OUT}le
-TPLGFN=test-${DIRECTION}-ssp5-mclk-0-I2S-${COMP}-${INFMT}-${OUTFMT}-48k-24576k-codec.tplg
+TPLGFN=out.tplg
 TPLG=${TPLG_DIR}/${TPLGFN}
 
 # If binary test vectors

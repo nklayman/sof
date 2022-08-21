@@ -51,6 +51,7 @@
 	(MAILBOX_BASE + MAILBOX_TRACE_OFFSET)
 
 static inline void mailbox_sw_reg_write(size_t offset, uint32_t src) { }
+static inline void mailbox_sw_regs_write(size_t offset, const void *src, size_t bytes) { }
 
 #endif /* __PLATFORM_LIB_MAILBOX_H__ */
 
